@@ -3,6 +3,13 @@ import { products } from '../../starting-code/data/products.js';
 import './HomePage.css';
 
 export function HomePage() {
+    fetch('http://localhost:3000/api/products')
+        .then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data);
+        })
+
     return (
         <>
             <title>E-Commerce Page</title>
@@ -12,7 +19,7 @@ export function HomePage() {
                 <div className="products-grid">
                     {products.map((product) => {
                         return (
-                            <div className="product-container" key="product.id">
+                            <div className="product-container" key={product.id}>
                                 <div className="product-image-container">
                                     <img className="product-image"
                                         src={product.image} />
