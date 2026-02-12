@@ -3,18 +3,15 @@ import { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import './HomePage.css';
 
-export function HomePage() {
+export function HomePage( {cart} ) {
     const [products, setProduct] = useState([]);
-    const [cart, setCart] = useState([]);
+    
+    
     useEffect(() => {
         // used server proxy for this see vite.config in there see server proxy api
         axios.get('/api/products')
             .then((response) => {
                 setProduct(response.data);
-            })
-        axios.get('/api/cart-items')
-            .then((response) => {
-                setCart(response.data);
             })
     }, []);
 
