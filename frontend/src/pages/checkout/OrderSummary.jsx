@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 
 export function OrderSummary({ deliveryOptions, cart, loadCart }) {
     const [localCart, setLocalCart] = useState(cart);
+    
     useEffect(() => {
         setLocalCart(cart);
     }, [cart]);
+    
     const deleteCartItem = async (productId) => {
         await axios.delete(`/api/cart-items/${productId}`);
         await loadCart();
