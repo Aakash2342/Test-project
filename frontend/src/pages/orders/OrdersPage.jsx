@@ -5,7 +5,7 @@ import './OrdersPage.css';
 import axios from 'axios';
 import { useState, useEffect, Fragment } from 'react';
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, loadCart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -20,6 +20,14 @@ export function OrdersPage({ cart }) {
                 console.error('Error fetching orders:', error);
             });
     }, []);
+
+        const addCart = async (productId, quantity) => {
+        await axios.post('/api/cart-items', {
+            productId,
+            quantity
+        });
+        await loadCart();
+    }
 
     return (
         <>
@@ -80,7 +88,9 @@ export function OrdersPage({ cart }) {
                                                 Quantity: {orderProduct.quantity}
                                             </div>
 
-                                            <button className="buy-again-button button-primary">
+                                            <button className="buy-again-button button-primary"
+                                                onClick={() => addCart(orderProduct.product.id, orderProduct.quantity)}
+                                            >
                                                 <img
                                                     className="buy-again-icon"
                                                     src="images/icons/buy-again.png"
