@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { formatMoney } from '../../utils/money';
 import { Header } from '../../components/Header';
 import './OrdersPage.css';
-import axios from 'axios';
+import api from '../../utils/api';
 import { useState, useEffect, Fragment } from 'react';
 
 export function OrdersPage({ cart, loadCart }) {
@@ -11,7 +11,7 @@ export function OrdersPage({ cart, loadCart }) {
     useEffect(() => {
         document.title = 'Orders';
 
-        axios
+        api
             .get('/api/orders?expand=products')
             .then((response) => {
                 setOrders(response.data);
@@ -22,7 +22,7 @@ export function OrdersPage({ cart, loadCart }) {
     }, []);
 
         const addCart = async (productId, quantity) => {
-        await axios.post('/api/cart-items', {
+        await api.post('/api/cart-items', {
             productId,
             quantity
         });

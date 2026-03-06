@@ -1,16 +1,16 @@
 import { render, screen, within } from '@testing-library/react'
 import { it, expect, describe, vi, beforeEach } from 'vitest'
-import axios from 'axios';
+import api from '../../utils/api';
 import { MemoryRouter } from 'react-router';
 import { HomePage } from './HomePage'
 
-vi.mock('axios');
+vi.mock('api');
 
 describe('HomePage Component', () => {
     let loadCart;
     beforeEach(() => {
         loadCart = vi.fn();
-        axios.get.mockImplementation(async (urlPath) => {
+        api.get.mockImplementation(async (urlPath) => {
             if (urlPath === '/api/products') {
                 return {
                     data: [
