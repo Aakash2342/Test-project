@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../utils/api';
 import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
 import './HomePage.css';
@@ -11,7 +11,7 @@ export function HomePage({ cart, loadCart }) {
     useEffect(() => {
         const getHomeData = async () => {
             // used server proxy for this see vite.config in there see server proxy api
-            const response = await axios.get('/api/products')
+            const response = await api.get('/api/products')
             setProduct(response.data);
 
         };
